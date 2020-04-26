@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html>
+<title>Members</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+<link rel="stylesheet" href="https://www.w3schools.com/lib/w3-theme-cyan.css">
+<link rel="stylesheet" href="css/loginStyle.css">
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootswatch/3.3.7/lumen/bootstrap.min.css">
+<link rel="stylesheet" href="css/membersStyle.css">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+<body>
+  <!-- Top container -->
+  <div class="w3-bar w3-top w3-cyan w3-large" style="z-index:4">
+    <button class="w3-bar-item w3-button w3-hide-large w3-hover-none w3-hover-text-light-grey" onclick="w3_open();"><i
+        class="fa fa-bars"></i>  Menu</button>
+    <a href="https://github.com/kberner14/30-Days" style="padding: 0px" class="w3-bar-item w3-button w3-right "><span
+        class="w3-bar-item w3-right "><i class="fa fa-github "></i> GitHub Repo</span></a>
+  </div>
+
+  <!-- Side Menu -->
+  <nav class="w3-sidebar w3-collapse w3-light-grey" style="z-index:3;width:300px;" id="mySidebar"><br>
+    <div class="w3-container w3-row">
+      <div class="w3-col s8 w3-bar">
+        <span>Welcome, <strong><span class="member-name"></span></strong></span><br>
+      </div>
+    </div>
+    <hr>
+    <div class="w3-container">
+      <h3>30 Day Dashboard</h3>
+    </div>
+    <div class="w3-bar-block">
+      <a href="#" class="w3-bar-item w3-button w3-padding-16 w3-hide-large w3-dark-grey w3-hover-black"
+        onclick="w3_close()" title="close menu"><i class="fa fa-remove fa-fw"></i>  Close Menu</a>
+      <a href="#" class="w3-bar-item w3-button w3-padding w3-blue"><i class="fa fa-home"></i>  Home</a>
+      <a href="/logout" class="w3-bar-item w3-button w3-padding"><i class="fa fa-sign-out"></i>  Logout</a>
+    </div>
+  </nav>
+
+  <!-- Main Content -->
+  <div class="w3-main" style="margin-left:300px;margin-top:43px;">
+    <header class="w3-container" style="padding-top:22px">
+      <h5><b><i class="fa fa-dashboard"></i> Workout Setup</b></h5>
+    </header>
+    <div class="w3-container">
+      <div class="w3-row">
+        <div class="w3-col">
+          <div class="w3-panel w3-card-4 w3-light-grey w3-center" id="form-card">
+            <form role="form " id="workout-form">
+              <div class="form-group">
+                <label for="pwd">Type of Workout:</label>
+                <select id="workout" class="custom-select" aria-labelledby="dropdownMenuButton">
+                  <option selected value="Pushups">Pushup</option>
+                  <option value="Situps">Situp</option>
+                  <option value="JumpRope">Jump Rope</option>
+                </select>
+                <button type="submit" class="btn btn-default" id="challenge-btn">
+                  <i class="fa fa-heartbeat"></i> Let's Do It</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+      <br>
+      <div class="w3-container w3-text-theme">
+        <ul class="w3-ul w3-border-top" id="table">
+          
+            {{#each challenge}}
+            {{#unless isComplete}}
+            <li>
+              <p>{{day}}</p>
+              <p>{{challengeName}}</p>
+              <p>{{reps}}</p>
+              {{!-- still need to make the reps function--}}
+              <p>{{isComplete}}</p>
+            </li>
+            {{/unless}}
+            {{/each}}
+          
+        </ul>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Get the Sidebar
+    var mySidebar = document.getElementById("mySidebar");
+
+    // Get the DIV with overlay effect
+    var overlayBg = document.getElementById("myOverlay");
+
+    // Toggle between showing and hiding the sidebar, and add overlay effect
+    function w3_open() {
+      if (mySidebar.style.display === 'block') {
+        mySidebar.style.display = 'none';
+        overlayBg.style.display = "none";
+      } else {
+        mySidebar.style.display = 'block';
+        overlayBg.style.display = "block";
+      }
+    }
+
+    // Close the sidebar with the close button
+    function w3_close() {
+      mySidebar.style.display = "none";
+      overlayBg.style.display = "none";
+    }
+  </script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script type="text/javascript" src="js/members.js"></script>
+
+</body>
+
+</html>
