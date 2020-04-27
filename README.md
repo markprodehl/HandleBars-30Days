@@ -26,4 +26,4 @@ Created by Mark Prodehl, Ruben Burrell, Albert Cervantes, and Kyle Berner(https:
 
 
 ## Screenshots
-![Alt text](public/assets/img/30_Days.png? "Optional Title")
+![Alt text](public/assets/img/30_days.png? "Optional Title")
