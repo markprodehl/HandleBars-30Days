@@ -1,0 +1,11 @@
+<form role="form " id="workout-form">
+    <div class="form-group">
+        <i class="fa fa-heartbeat"></i>
+        <label for="pwd">Type of Workout:</label>
+        <select name="workout" id="workout" class="custom-select" aria-labelledby="dropdownMenuButton">
+            {{#each challenges}}
+            <option value="{{this}}">{{this}}</option>
+            {{/each}}
+        </select>
+    </div>
+</form>

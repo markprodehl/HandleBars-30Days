@@ -64,27 +64,24 @@ module.exports = function(app) {
     }
   });
 
-  app.patch("/api/user_data/challenge", (req, res) => {
-    if (!req.user) {
-      // The user is not logged in, send back an empty object
-      res.json({ result: "no result" });
-      return;
-    }
-    db.User.update({
-      challenge: req.body.challenge
-    }, {
-      where: {
-        id: req.user.id
-      }
-    }).then(() => {
-      res.json({ result: "successful patch" });
-    });
-  });
-
-
-
-
-
+//   ***************
+//   app.patch("/api/user_data/challenge", (req, res) => {
+//     if (!req.user) {
+//       // The user is not logged in, send back an empty object
+//       res.json({ result: "no result" });
+//       return;
+//     }
+//     db.User.update({
+//       challenge: req.body.challenge
+//     }, {
+//       where: {
+//         id: req.user.id
+//       }
+//     }).then(() => {
+//       res.json({ result: "successful patch" });
+//     });
+//   });
+// **************
 
   app.get("/api/challenge/:day/:challenge/:val", isAuthenticated, function(req, res) {
     db.User.findOne({

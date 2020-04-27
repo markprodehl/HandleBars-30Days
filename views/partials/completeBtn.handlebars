@@ -1,0 +1,4 @@
+<button type="submit" class="btn btn-{{#if isComplete}}default{{else}}primary{{/if}} completeBtn"
+    data-status="{{#if isComplete}}0{{else}}1{{/if}}" data-day="{{day}}" data-challenge="{{challengeName}}">
+    {{#if isComplete}} Finished {{else}} Complete? {{/if}}
+</button>

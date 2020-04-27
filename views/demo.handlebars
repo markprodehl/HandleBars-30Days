@@ -35,19 +35,7 @@
         <div class="w3-row">
             <div class="w3-col">
                 <div class="w3-panel w3-card-4 w3-light-grey w3-center" id="form-card">
-                    <form role="form " id="workout-form">
-                        <div class="form-group">
-                            <label for="pwd">Type of Workout:</label>
-                            <select name="workout" id="workout" class="custom-select"
-                                aria-labelledby="dropdownMenuButton">
-                                <option selected value="Pushups">Pushup</option>
-                                <option value="Situps">Situp</option>
-                                <option value="JumpRope">Jump Rope</option>
-                            </select>
-                            <button type="submit" class="btn btn-default" id="challenge-btn">
-                                <i class="fa fa-heartbeat"></i> Let's Do It</button>
-                        </div>
-                    </form>
+                    {{>challengeSelect}}
                 </div>
             </div>
         </div>
@@ -55,27 +43,7 @@
         <div class="w3-container w3-text-theme">
             <ul class="w3-ul w3-border-top" id="table">
                 {{#each challenge}}
-                <li class="{{color}}">
-                    <div class="w3-row">
-                        <div class="w3-col s3 w3-center">
-                            <p>{{day}}</p>
-                        </div>
-                        <div class="w3-col s3 w3-center">
-                            <p>ChallengeName: {{challengeName}}</p>
-                        </div>
-                        <div class="w3-col s3 w3-center">
-                            <p>Reps: {{reps}}</p>
-                        </div>
-                        <div class="w3-col s3 w3-center">
-                            {{#if isComplete}}
-                            <button type="submit" class="btn btn-default" disabled>Finished</button>
-                            {{else}}
-                            <button type="submit" class="btn btn-primary completeBtn" data-day="{{day}}"
-                                data-challenge="{{challengeName}}">Complete?</button>
-                            {{/if}}
-                        </div>
-                    </div>
-                </li>
+                {{>challengeRow}}
                 {{/each}}
                 {{#if empty}}
                 <div class="w3-panel w3-card-2">
@@ -87,6 +55,7 @@
     </div>
 </div>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+{{!-- <script type="text/javascript" src="js/members.js"></script> --}}
 <script>
 
     const path = location.search.split("=")[1] || 'Pushups'
@@ -94,7 +63,7 @@
     $(".completeBtn").on("click", function () {
         const day = $(this).data('day')
         const challenge = $(this).data('challenge')
-        const newVal = 1;
+        const newVal = $(this).data('status')
         const url = `/api/challenge/${day}/${challenge}/${newVal}`
 
         $.get(url)
@@ -104,9 +73,10 @@
             .catch((err) => console.warn(err))
     })
 
-    $("#workout-form").on("submit", function () {
+    $("#workout").change( function () {
         const page = $("#workout").val();
         console.log(page)
+        this.form.submit();
     })
 
     // Get the Sidebar

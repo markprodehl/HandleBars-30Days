@@ -24,20 +24,16 @@ module.exports = function(app) {
 
   // Here we've add our isAuthenticated middleware to this route.
   // If a user who is not logged in tries to access this route they will be redirected to the signup page
-  
+
   // app.get("/members", isAuthenticated, function(req, res) {
   //   res.sendFile(path.join(__dirname, "../public/members.html"));
   // });
-
 
   app.get("/members", isAuthenticated, function(req, res) {
     let page = 'Pushup';
     if (req.query.workout) {
       page = req.query.workout
     }
-
-    console.log(page)
-
 
     const colorArr = [
       "w3-theme-l5",
@@ -55,9 +51,13 @@ module.exports = function(app) {
         id: req.user.id
       }
     }).then(dbUser => {
+      let pageModel = dbUser.toJSON()
 
-      pageModel = dbUser.toJSON()
-      pageModel.challenge = dbUser.challenge
+      if (!pageModel.challenge) pageModel.challenge = [];
+      // Holds previous challenge data 
+      let duplicate = {...pageModel }
+
+      pageModel.challenge = pageModel.challenge
         .filter(c => c.challengeName === page)
         .map((c, i) => ({
           ...c,
@@ -73,14 +73,24 @@ module.exports = function(app) {
             challengeName: page,
             color: colorArr[i % colorArr.length],
             reps: (i + 25).toString(),
-            isComplete: "0"
+            isComplete: 0
           };
           newWorkouts.push(challengeDay);
         }
       }
-      
+      pageModel.challenge = [...pageModel.challenge, ...newWorkouts]
+      pageModel.challenges = [
+        'Pushups',
+        'Situps',
+        'JumpRope',
+        'Burpees',
+        'Skip',
+        'pullups'
+      ]
       dbUser.update({
-        challenge: [...dbUser.challenge, ...newWorkouts]
+        // insert previous challenge data
+        // insert new challenge data
+        challenge: [...duplicate.challenge, ...newWorkouts]
       }).then(() => {
         res.render("demo", {
           ...pageModel,
