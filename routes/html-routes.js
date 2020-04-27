@@ -45,7 +45,7 @@ module.exports = function(app) {
       "w3-theme-d1"
     ];
 
-    //This code needs to go into a me
+    //This code could go into a seperate file
     db.User.findOne({
       attributes: ["email", "id", "challenge"],
       where: {
