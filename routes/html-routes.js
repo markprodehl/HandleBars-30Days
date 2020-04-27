@@ -92,7 +92,7 @@ module.exports = function(app) {
           challenge: [...duplicate.challenge, ...newWorkouts]
         })
         .then(() => {
-          res.render("demo", {
+          res.render("members", {
             ...pageModel,
             empty: pageModel.challenge.length === 0
           });
