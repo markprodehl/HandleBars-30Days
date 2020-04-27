@@ -21,9 +21,9 @@ module.exports = function(app) {
   // otherwise send back an error
   app.post("/api/signup", function(req, res) {
     db.User.create({
-        email: req.body.email,
-        password: req.body.password
-      })
+      email: req.body.email,
+      password: req.body.password
+    })
       .then(function() {
         res.redirect(307, "/api/login");
       })
@@ -64,43 +64,49 @@ module.exports = function(app) {
     }
   });
 
-//   ***************
-//   app.patch("/api/user_data/challenge", (req, res) => {
-//     if (!req.user) {
-//       // The user is not logged in, send back an empty object
-//       res.json({ result: "no result" });
-//       return;
-//     }
-//     db.User.update({
-//       challenge: req.body.challenge
-//     }, {
-//       where: {
-//         id: req.user.id
-//       }
-//     }).then(() => {
-//       res.json({ result: "successful patch" });
-//     });
-//   });
-// **************
+  //   ***************
+  //   app.patch("/api/user_data/challenge", (req, res) => {
+  //     if (!req.user) {
+  //       // The user is not logged in, send back an empty object
+  //       res.json({ result: "no result" });
+  //       return;
+  //     }
+  //     db.User.update({
+  //       challenge: req.body.challenge
+  //     }, {
+  //       where: {
+  //         id: req.user.id
+  //       }
+  //     }).then(() => {
+  //       res.json({ result: "successful patch" });
+  //     });
+  //   });
+  // **************
 
-  app.get("/api/challenge/:day/:challenge/:val", isAuthenticated, function(req, res) {
+  app.get("/api/challenge/:day/:challenge/:val", isAuthenticated, function(
+    req,
+    res
+  ) {
     db.User.findOne({
-        where: { id: req.user.id }
-      })
+      where: { id: req.user.id }
+    })
       .then(dbUser => {
         dbUser.update({
           challenge: dbUser.challenge.map(c => {
-            if (c.day === req.params.day && c.challengeName === req.params.challenge) {
+            if (
+              c.day === req.params.day &&
+              c.challengeName === req.params.challenge
+            ) {
               return {
                 ...c,
                 isComplete: req.params.val
-              }
+              };
             }
-            return c
+            return c;
           })
-        })
+        });
       })
       .then(() => res.sendStatus(200))
-      .catch(err => res.sendStatus(500).send(err))
-  })
+      .catch(err => res.sendStatus(500).send(err));
+  });
 };

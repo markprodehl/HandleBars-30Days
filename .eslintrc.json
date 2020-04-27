@@ -1,6 +1,6 @@
 {
   "parserOptions": {
-    "ecmaVersion": 2017
+    "ecmaVersion": 2018
   },
   "env": {
     "es6": true,
@@ -27,6 +27,7 @@
     "indent": ["error", 2],
     "quotes": ["error", "double", { "allowTemplateLiterals": true }],
     "semi": ["error", "always"],
-    "prettier/prettier": "error"
+    "prettier/prettier": "error",
+    "rest-spread-spacing": ["error", "never"]
   }
 }
