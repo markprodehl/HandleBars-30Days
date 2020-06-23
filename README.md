@@ -22,7 +22,7 @@ Project is in progress. Feel free to email us  with any suggestions or to report
 Created by Mark Prodehl, Ruben Burrell, Albert Cervantes, and Kyle Berner(https://github.com/kberner14/30-Days) - kyleberner14@yahoo.com - feel free to contact us!
 
 ## Deployed
-(https://day-30-challenge.herokuapp.com/login)
+(https://thirty-day-challenge.herokuapp.com/)
 
 
 ## Screenshots
